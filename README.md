@@ -15,7 +15,7 @@ The original is at https://projecteuler.net/problem=22
 
 ## Installation, running and technologies
 
-It is intended that the solution works with a recent-ish version of Ruby with no extra gems required. `ruby twentytwo.rb` should work as long as the default `names.txt` file is in the same directory.
+It is intended that the solution works with a recent-ish version of Ruby with no extra gems required. `ruby twentytwo.rb` should work as long as the default `names.txt` file is in the same directory and the required class and module ruby files are in the `lib` subdirectory.
 
 Running tests requires that a test framework be installed, so you'll need to have Bundler installed, and run `bundle install` in the project root to install RSpec. Once that's done, running `rspec` should execute the tests.
 
@@ -29,7 +29,7 @@ These may change as development progresses:
 - [x] Work out a name_place_score for a name in an ordered list
 - [x] Calculate a list_score for a list of alphabetised names
 - [x] Read a names file into a list
-- [ ] Application code that opens names.txt and returns list_score
+- [x] Application code that opens names.txt and returns list_score
 - [ ] Refactoring - does diffing or similar help on iterative name_score for similar names?
 - [ ] Refactoring - does memory usage need consideration for in-memory storage of intermediate states?
 - [ ] (Handle non-alphabetic characters appropriately) - the given text file is all upper case alphabetic
@@ -68,4 +68,4 @@ Each class and instance in Ruby brings an overhead in processing and memory usag
 
 A specific efficiency issue related to structure is that a simple #sort or #sort_by on an array of strings is likely to be more efficient than the separated approach of defining comparison within each name instance. That is, sorting names alphabetically within a list is trivial when each element in the list is a string, but when it's a Name object then <=> has to be defined as a custom method in the class.
 
-It's worth noting that none of the RSpec examples go anywhere near the final text file in terms of complexity and size. This could introduce a level of load that requires refactoring or code changes.
+It's worth noting that none of the RSpec examples go anywhere near the final text file in terms of complexity and size.
