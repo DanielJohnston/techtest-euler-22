@@ -32,3 +32,26 @@ describe 'Alphabetisation' do
     expect(list.names).to eq [name_2, name_1]
   end
 end
+
+describe '#name_place_score' do
+  it 'a name_score of 1 in 1st position returns 1' do
+    name = double("name")
+    allow(name).to receive(:name_score).and_return(1)
+    names = [name]
+    allow(names).to receive(:sort).and_return(names)
+    list = NameList.new names
+    expect(list.name_place_score(name)).to eq 1
+  end
+
+  it 'a name score of 20 in 1394th position returns 27880' do
+    name_1 = double("name_1")
+    allow(name_1).to receive(:name_score).and_return(20)
+    name_2 = double("name_2")
+    names = []
+    1393.times { names << name_2 }
+    names << name_1
+    allow(names).to receive(:sort).and_return(names)
+    list = NameList.new names
+    expect(list.name_place_score(name_1)).to eq 27880
+  end
+end

@@ -26,7 +26,7 @@ These may change as development progresses:
 - [x] Set up Gemfile, RSpec framework, and README - I also created a Name class, just to test the structure was working
 - [x] Calculate a name_score for each name
 - [x] Alphabetise a list of names
-- [ ] Work out a name_place_score for a name in an ordered list
+- [x] Work out a name_place_score for a name in an ordered list
 - [ ] Calculate a list_score for a list of alphabetised names
 - [ ] Read the names file into a list
 - [ ] Refactoring - does diffing or similar help on iterative name_score for similar names?

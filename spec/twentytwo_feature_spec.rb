@@ -19,3 +19,16 @@ describe 'Alphabetise a list' do
     expect(list.names).to eq [f, b, a, g, h, j, i, e, d, c]
   end
 end
+
+describe 'Calculate the name_place_score of a name in a list' do
+  it "COLIN as 938th name in a list has a score of 49714" do
+    names = []
+    937.times do
+      names << Name.new("ARTHUR")
+    end
+    colin = Name.new("COLIN")
+    names << colin
+    list = NameList.new(names)
+    expect(list.name_place_score(colin)).to eq 49714
+  end
+end
