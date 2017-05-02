@@ -28,7 +28,8 @@ These may change as development progresses:
 - [x] Alphabetise a list of names
 - [x] Work out a name_place_score for a name in an ordered list
 - [x] Calculate a list_score for a list of alphabetised names
-- [ ] Read the names file into a list
+- [x] Read a names file into a list
+- [ ] Application code that opens names.txt and returns list_score
 - [ ] Refactoring - does diffing or similar help on iterative name_score for similar names?
 - [ ] Refactoring - does memory usage need consideration for in-memory storage of intermediate states?
 - [ ] (Handle non-alphabetic characters appropriately) - the given text file is all upper case alphabetic
@@ -40,20 +41,26 @@ Our end goal is a file, `twentytwo.rb`, which when run should return the solutio
 
 The approach taken is TDD outside-in, with RSpec feature tests driving unit tests driving development. Feature tests were introduced once a second class was created, and unit tests use doubles and stubbing to maintain isolation. The feature tests are written in standard RSpec without Capybara, as there's no web component to development. The repo was committed to Git after completion of each feature, and branches aren't used as there's no parallel development or need to maintain a working master.
 
-The methods we're looking at include:
+The solution methods we're looking at are:
 
 * name_score operating on a name
 * name_place_score operating on name_score and position in name_list
 * list_score operating on name_place_score and name_list
 
-The classes we're looking at include:
+A number of methods have been left public that aren't explicitly required by the spec. To test that objects match to requirements, there are methods that return instances out of the class. It would be possible to create RSpec matchers that force access to the internals, or to test purely on end results, but this approach seemed preferable for now. Those methods are:
+
+* name
+* names
+* position
+
+Additionally, the <=> method is defined on Name so that the sort method can be used on an array of names
+
+The classes we're looking at are:
 
 * Name
 * NameList
 
-### Public and private methods
-
-A number of methods have been left open that aren't explicitly required by the spec. To test that objects match to requirements, there are methods that return instances out of the class, e.g. `name` and `list`. It would be possible to create RSpec matchers that force access to the internals, or to test purely on end results, but this approach was preferable for TDD purposes.
+In order to TDD the file reading, I created an Ingest module which returns a NameList full of Name objects. This feels dubious, but seemed preferable to not testing. I ended up stubbing CSV.read as CSV doesn't use the expected IO stream, and there wasn't really enough left over to justify writing unit tests.
 
 ### Efficiency and memory usage
 

@@ -1,5 +1,5 @@
-Dir[File.expand_path('../lib/*.rb', __FILE__)].each do |file|
-  require file
+Dir[File.expand_path(File.join(File.dirname(File.absolute_path(__FILE__)), '../lib')) + "/**/*.rb"].each do |file|
+    require file
 end
 
 describe 'Alphabetise a list' do
@@ -48,6 +48,28 @@ describe 'Calculate the list_score of a list of names' do
     names = []
     50.times {names << Name.new("A")}
     list = NameList.new(names)
+    expect(list.list_score).to eq 1275
+  end
+end
+
+describe 'Calculate the list_score of a file' do
+  it 'A file with just A has a list score of 1' do
+    allow(CSV).to receive(:read).and_return(["A"])
+    list = Ingest.file('nonexistent.rb')
+    expect(list.list_score).to eq 1
+  end
+
+  it 'File with "A","B" has a list score of 5' do
+    allow(CSV).to receive(:read).and_return(["A","B"])
+    list = Ingest.file('nonexistent.rb')
+    expect(list.list_score).to eq 5
+  end
+
+  it 'File with A repeated 50 times has a list score of 1275' do
+    names = []
+    50.times { names << 'A' }
+    allow(CSV).to receive(:read).and_return(names)
+    list = Ingest.file('nonexistent.rb')
     expect(list.list_score).to eq 1275
   end
 end
