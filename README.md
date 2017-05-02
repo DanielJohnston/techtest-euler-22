@@ -24,15 +24,15 @@ Running tests requires that a test framework be installed, so you'll need to hav
 These may change as development progresses:
 
 - [x] Set up Gemfile, RSpec framework, and README - I also created a Name class, just to test the structure was working
+- [x] Calculate a name_score for each name
 - [ ] Read the names file into an array
 - [ ] Alphabetise the array
-- [ ] Calculate a name_score for each name
-- [ ] Handle non-alphabetic characters appropriately
 - [ ] Work out a name_place_score for a name in an ordered list
 - [ ] Calculate a list_score for a list of alphabetised names
 - [ ] Refactoring - does diffing or similar help on iterative name_score for similar names?
 - [ ] Refactoring - does memory usage need consideration for in-memory storage of intermediate states?
-- [ ] (Add ability to give a new filename instead of names.txt)
+- [ ] (Handle non-alphabetic characters appropriately) - the given text file is all upper case alphabetic
+- [ ] (Add ability to give a new filename instead of names.txt) - goes beyond the brief
 
 ## Structure
 
@@ -48,3 +48,5 @@ The classes we're looking at include:
 
 * Name
 * Name_List
+
+As a side note, each class and instance in Ruby brings an overhead in processing and memory usage. I'm using a formal separation for this, but it would potentially be more efficient to solve the problem in a single script with minimal object creation. The best approach take would likely depend on longer term goals. As is, I've held off from definining a Letter class, as it would make some of the code very slightly more readable, but would add a bit too much complexity to my mind.
