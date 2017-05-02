@@ -1,4 +1,6 @@
 class Name
+  include Comparable
+  
   def initialize name
     raise "Names can only consist of capitalised alphabetic characters A-Z" unless name =~ /^[A-Z]*$/
     @name = name
@@ -12,6 +14,10 @@ class Name
     @name.chars.reduce(0) do |total, letter|
       total + letter_score(letter)
     end
+  end
+
+  def <=> comparator_name
+    @name <=> comparator_name.name
   end
 
   private

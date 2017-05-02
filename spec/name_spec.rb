@@ -57,3 +57,12 @@ describe '#name_score' do
     expect(name.name_score).to eq 53
   end
 end
+
+# This is used for alphabetising names in a names list
+describe '#<=>' do
+  it "shows ARTHUR before CONAN" do
+    name_1 = Name.new "ARTHUR"
+    name_2 = Name.new "CONAN"
+    expect(name_1.<=> name_2).to eq -1
+  end
+end
