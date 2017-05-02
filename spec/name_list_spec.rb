@@ -55,3 +55,26 @@ describe '#name_place_score' do
     expect(list.name_place_score(name_1)).to eq 27880
   end
 end
+
+describe '#position' do
+  it 'a name in 13th position returns 13' do
+    name_1 = double("name_1")
+    names = []
+    12.times { names << double("name_2") }
+    names << name_1
+    allow(names).to receive(:sort).and_return(names)
+    list = NameList.new names
+    expect(list.position(name_1)).to eq 13
+  end
+end
+
+describe '#list_score' do
+  it 'a list of 1 item with name_score of 1 returns 1' do
+    name = double("name")
+    allow(name).to receive(:name_score).and_return(1)
+    names = [name]
+    allow(names).to receive(:sort).and_return(names)
+    list = NameList.new names
+    expect(list.list_score).to eq 1
+  end
+end

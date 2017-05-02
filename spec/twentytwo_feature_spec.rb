@@ -32,3 +32,22 @@ describe 'Calculate the name_place_score of a name in a list' do
     expect(list.name_place_score(colin)).to eq 49714
   end
 end
+
+describe 'Calculate the list_score of a list of names' do
+  it 'A has a list score of 1' do
+    list = NameList.new([Name.new("A")])
+    expect(list.list_score).to eq 1
+  end
+
+  it 'A, B has a list score of 5' do
+    list = NameList.new([Name.new("A"), Name.new("B")])
+    expect(list.list_score).to eq 5
+  end
+
+  it 'A repeated 50 times has a list score of 1275' do
+    names = []
+    50.times {names << Name.new("A")}
+    list = NameList.new(names)
+    expect(list.list_score).to eq 1275
+  end
+end

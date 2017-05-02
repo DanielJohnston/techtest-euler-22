@@ -1,6 +1,7 @@
 class Name
-  include Comparable
-  
+  # Fun fact, including Comparable here breaks the code, as the position method in
+  # NameList is dependent on == matching the exact object and not the same name
+
   def initialize name
     raise "Names can only consist of capitalised alphabetic characters A-Z" unless name =~ /^[A-Z]*$/
     @name = name

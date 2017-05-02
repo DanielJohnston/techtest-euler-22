@@ -27,7 +27,7 @@ These may change as development progresses:
 - [x] Calculate a name_score for each name
 - [x] Alphabetise a list of names
 - [x] Work out a name_place_score for a name in an ordered list
-- [ ] Calculate a list_score for a list of alphabetised names
+- [x] Calculate a list_score for a list of alphabetised names
 - [ ] Read the names file into a list
 - [ ] Refactoring - does diffing or similar help on iterative name_score for similar names?
 - [ ] Refactoring - does memory usage need consideration for in-memory storage of intermediate states?
@@ -37,6 +37,8 @@ These may change as development progresses:
 ## Structure and approach
 
 Our end goal is a file, `twentytwo.rb`, which when run should return the solution to Project Euler Q22. However, to make the code cleaner and more re-usable, it's preferable to encapsulate the code in classes and methods, which are stored in the `lib` folder in this instance. We have the original text file, which is read into a list. The list is made of names, and has a score which is dependent on the names and their position in the list.
+
+The approach taken is TDD outside-in, with RSpec feature tests driving unit tests driving development. Feature tests were introduced once a second class was created, and unit tests use doubles and stubbing to maintain isolation. The feature tests are written in standard RSpec without Capybara, as there's no web component to development. The repo was committed to Git after completion of each feature, and branches aren't used as there's no parallel development or need to maintain a working master.
 
 The methods we're looking at include:
 
@@ -53,8 +55,10 @@ The classes we're looking at include:
 
 A number of methods have been left open that aren't explicitly required by the spec. To test that objects match to requirements, there are methods that return instances out of the class, e.g. `name` and `list`. It would be possible to create RSpec matchers that force access to the internals, or to test purely on end results, but this approach was preferable for TDD purposes.
 
-### Efficiency
+### Efficiency and memory usage
 
 Each class and instance in Ruby brings an overhead in processing and memory usage. I'm using a formal separation for this, partly so that I can take a TDD approach to solving the problem. It would potentially be more efficient to solve the problem in a single script with minimal object creation. The best approach to take would likely depend on longer term goals. As is, I've held off from defining a Letter class, as it would make some of the code very slightly more readable, but would add a bit too much complexity to my mind.
 
 A specific efficiency issue related to structure is that a simple #sort or #sort_by on an array of strings is likely to be more efficient than the separated approach of defining comparison within each name instance. That is, sorting names alphabetically within a list is trivial when each element in the list is a string, but when it's a Name object then <=> has to be defined as a custom method in the class.
+
+It's worth noting that none of the RSpec examples go anywhere near the final text file in terms of complexity and size. This could introduce a level of load that requires refactoring or code changes.
