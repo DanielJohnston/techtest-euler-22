@@ -1,6 +1,6 @@
 require 'name_list'
 
-describe 'Creating a list' do
+describe NameList do
   it 'allows a list to be created' do
     expect{ subject }.to_not raise_error
   end

@@ -2,7 +2,7 @@ require 'name'
 
 describe 'Creating a name' do
   it 'allows a name to be created' do
-    expect{ subject }.to_not raise_error
+    expect{ Name.new }.to_not raise_error
   end
 
   it 'stores a created name' do
